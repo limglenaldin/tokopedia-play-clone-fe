@@ -1,33 +1,34 @@
 // Built-in Libraries
 // Third-party Libraries
-import {ChakraProvider, Flex, Heading, Text } from '@chakra-ui/react'
+import {Box, ChakraProvider} from '@chakra-ui/react'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
+
+// Component
+import Header from './components/Header';
+
+// Pages
+import Index from './pages/Index';
+import Detail from './pages/Videos/Detail';
+import Search from './pages/Search';
 
 function App() {
   return (
     <ChakraProvider>
       <Router>
-        <Switch>
-          <Route path="/detail">
-            <Flex bg="red.500" minW="full" minH='100vh' direction="column">
-              <Heading as='h1' size='lg'>Hello from Detail</Heading>
-              <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio natus, id dicta consequuntur iure ratione magni? Deserunt, nam quae.</Text>
-              <Link to="/">Go to Home</Link>
-            </Flex>
-          </Route>
-          <Route path="/">
-            <Flex bg="green.500" minW="full" minH='100vh' direction="column">
-              <Heading as='h1' size='lg'>Hello from Home</Heading>
-              <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio natus, id dicta consequuntur iure ratione magni? Deserunt, nam quae.</Text>
-              <Link to="/detail">Go to Detail</Link>
-            </Flex>
-          </Route>
-        </Switch>
+        <Box minW="full" bg="gray.800" color="white">
+          <Header />
+          <Box px="4" pb="4">
+            <Switch>
+              <Route path="/search" component={Search} />
+              <Route path="/detail" component={Detail} />
+              <Route path="/" component={Index} />
+            </Switch>
+          </Box>
+        </Box>
       </Router>
     </ChakraProvider>
   )
