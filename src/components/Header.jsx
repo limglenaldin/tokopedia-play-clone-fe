@@ -6,7 +6,11 @@ import { FiSearch } from "react-icons/fi";
 const Header = () => {
   return (
     <Flex px="4" py="5" mb="6" align="center">
-      <Text fontSize="lg" as="b">TokoPlay</Text>
+      <Text fontSize="lg" as="b">
+        <ReactRouterLink to="/">
+          TokoPlay
+        </ReactRouterLink>
+      </Text>
       <Spacer />
       <Flex align="center" gap="4">
         <ChakraLink as={ReactRouterLink} to="/search" pt="1">
