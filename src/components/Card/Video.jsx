@@ -1,15 +1,22 @@
 // Third-party Libraries
+import { useHistory } from "react-router-dom";
 import { Box, Card, CardBody, Flex, Icon, Image, Spacer, Text } from "@chakra-ui/react";
 import { FiEye } from "react-icons/fi";
 
 const VideoItem = () => {
+  let history = useHistory();
+
   const cardHeightResponsive = {
     base: "sm",
     lg: "md"
   }
 
+  const handleClickCard = () => {
+    history.push("/detail")
+  }
+
   return (
-    <Card color="white" height={cardHeightResponsive} maxW="sm" overflow="hidden" _hover={{cursor: "pointer"}}>
+    <Card color="white" height={cardHeightResponsive} maxW="sm" overflow="hidden" _hover={{cursor: "pointer"}} onClick={handleClickCard}>
       <CardBody p="2">
         <Flex
           position="relative"
