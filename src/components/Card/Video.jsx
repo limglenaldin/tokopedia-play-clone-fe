@@ -3,8 +3,13 @@ import { Box, Card, CardBody, Flex, Icon, Image, Spacer, Text } from "@chakra-ui
 import { FiEye } from "react-icons/fi";
 
 const VideoItem = () => {
+  const cardHeightResponsive = {
+    base: "sm",
+    lg: "md"
+  }
+
   return (
-    <Card color="white" height="md" overflow="hidden">
+    <Card color="white" height={cardHeightResponsive} maxW="sm" overflow="hidden" _hover={{cursor: "pointer"}}>
       <CardBody p="2">
         <Flex
           position="relative"
