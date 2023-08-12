@@ -24,7 +24,7 @@ function App() {
           <Box px="4" pb="4">
             <Switch>
               <Route path="/search" component={Search} />
-              <Route path="/detail" component={Detail} />
+              <Route path="/:id" component={Detail} />
               <Route path="/" component={Index} />
             </Switch>
           </Box>
