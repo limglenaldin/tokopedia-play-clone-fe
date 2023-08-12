@@ -1,24 +1,39 @@
 // Third-party Libraries
 import { Box, Card, CardBody, Heading, Image, Text } from "@chakra-ui/react"
+import PropTypes from 'prop-types';
 
-const ProductItem = () => {
+// Hooks
+import { useRupiahCurrency } from "../../hooks/useCurrency";
+
+const ProductItem = ({ data }) => {
+  const currency = useRupiahCurrency(data?.price)
+
+  const handleClickProduct = () => {
+    window.open(data?.link, '_blank')
+  }
+
   return (
-    <Card flexBasis="16%" flexShrink="0" maxW="sm">
+    <Card flexBasis="16%" flexShrink="0" maxW="sm" _hover={{cursor: "pointer"}} onClick={handleClickProduct}>
       <CardBody p="2">
         <Image
-          src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-          alt='Green double couch with wooden legs'
+          src={data?.imageUrl}
+          alt={data?.title}
           borderRadius='lg'
         />
         <Box mt="4">
-          <Heading size='sm'>Living room Sofa</Heading>
+          <Heading size='sm'>{data?.title}</Heading>
           <Text fontSize='md'>
-            Rp. 10.000
+            {currency}
           </Text>
         </Box>
       </CardBody>
     </Card>
   )
 }
+
+ProductItem.propTypes = {
+  data: PropTypes.object.isRequired,
+}
+
 
 export default ProductItem;
