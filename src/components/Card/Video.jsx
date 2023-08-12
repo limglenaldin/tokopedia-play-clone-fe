@@ -1,18 +1,22 @@
 // Third-party Libraries
 import { useHistory } from "react-router-dom";
 import { Box, Card, CardBody, Flex, Icon, Image, Spacer, Text } from "@chakra-ui/react";
+import PropTypes from 'prop-types';
+
+// Icons
 import { FiEye } from "react-icons/fi";
 
-const VideoItem = () => {
+// Chakra Responsive
+const cardHeightResponsive = {
+  base: "sm",
+  lg: "md"
+}
+
+const VideoItem = ({data}) => {
   let history = useHistory();
 
-  const cardHeightResponsive = {
-    base: "sm",
-    lg: "md"
-  }
-
   const handleClickCard = () => {
-    history.push("/detail")
+    history.push(`/${data._id}`)
   }
 
   return (
@@ -26,19 +30,19 @@ const VideoItem = () => {
         >
           <Flex bgColor="blackAlpha.400" align="center" gap="2" p="1" w="max-content" borderRadius="md">
             <Icon as={FiEye} />
-            <Text fontSize="sm">200</Text>
+            <Text fontSize="sm">{data.totalView}</Text>
           </Flex>
           <Spacer />
           <Box>
-            <Text fontSize="md" as="b">Sales Kamis Harga Sadis</Text>
-            <Text fontSize="sm">Uniqlo</Text>
+            <Text fontSize="md" as="b">{data.title}</Text>
+            <Text fontSize="sm">{data.store}</Text>
           </Box>
         </Flex>
         <Box inset="0" position="absolute"
         >
           <Image
-            src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            alt='Green double couch with wooden legs'
+            src={data.thumbnailUrl}
+            alt={data.title}
             position="absolute"
             objectFit="cover"
             h="full"
@@ -49,5 +53,10 @@ const VideoItem = () => {
     </Card>
   )
 }
+
+VideoItem.propTypes = {
+  data: PropTypes.object.isRequired,
+}
+
 
 export default VideoItem;
