@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 // Third-party Libraries
 import { useParams, useHistory } from "react-router-dom";
-import { AspectRatio, Box, Flex, FormControl, FormErrorMessage, Heading, Icon, IconButton, Input, Textarea } from "@chakra-ui/react";
+import { AspectRatio, Box, Center, Flex, FormControl, FormErrorMessage, Heading, Icon, IconButton, Input, Textarea } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form'
 
 // Icons
@@ -118,12 +118,14 @@ const Detail = () => {
               <Flex w={3/12} bgColor="gray.600" p="2" direction="column" borderRadius="xl" justify="space-between">
                 <Flex direction="column" gap="1" overflowY="auto" maxH="md">
                   {
-                    video?.comments?.map((comment) => (
-                      <CommentItem
-                        key={comment.id}
-                        data={comment}
-                      />
-                    ))
+                    video?.length > 1
+                      ? video?.comments?.map((comment) => (
+                          <CommentItem
+                            key={comment.id}
+                            data={comment}
+                          />
+                        ))
+                      : <Center minH="md">Be the first one to comment</Center>
                   }
                 </Flex>
                 <Box borderTop="1px" pt="4">
