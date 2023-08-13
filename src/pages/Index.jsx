@@ -2,10 +2,11 @@
 import { useEffect, useState } from "react";
 
 // Third-party Libraries
-import { Flex, Grid, Text } from "@chakra-ui/react";
+import { Flex, Grid } from "@chakra-ui/react";
 
 // Components
 import VideoItem from "../components/Card/Video";
+import VideoSkeleton from "../components/Skeleton/VideoSkeleton";
 
 // API
 import apiV1 from "../api/apiInstance";
@@ -44,7 +45,14 @@ const Index = () => {
       <Grid templateColumns={gridColResponsive} gap={4}>
         {
           loading
-            ? <Text>Loading</Text>
+            ? <>
+              <VideoSkeleton />
+              <VideoSkeleton />
+              <VideoSkeleton />
+              <VideoSkeleton />
+              <VideoSkeleton />
+              <VideoSkeleton />
+            </>
             : videos?.map((video) => (
                 <VideoItem
                   key={video._id}
