@@ -12,6 +12,9 @@ import VideoSkeleton from "../components/Loading/Skeleton/VideoSkeleton";
 // API
 import apiV1 from "../api/apiInstance";
 
+// Hooks
+import useUsername from "../hooks/useUsername";
+
 // Chakra Responsive
 const gridColResponsive = {
   base: "repeat(2, 1fr)",
@@ -24,6 +27,8 @@ const gridColResponsive = {
 const Index = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { username } = useUsername()
 
   useEffect(() => {
     const getVideos = async () => {
@@ -43,7 +48,9 @@ const Index = () => {
 
   return (
     <Flex minH='100vh' direction="column" pb="4">
-      <Header />
+      <Header
+        username={username}
+      />
       <Grid templateColumns={gridColResponsive} gap={4}>
         {
           loading
