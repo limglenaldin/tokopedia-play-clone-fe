@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 // Third-party Libraries
 import { useParams, useHistory } from "react-router-dom";
-import { AspectRatio, Box, Flex, FormControl, FormErrorMessage, Heading, Icon, IconButton, Input, Text, Textarea } from "@chakra-ui/react";
+import { AspectRatio, Box, Flex, FormControl, FormErrorMessage, Heading, Icon, IconButton, Input, Textarea } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form'
 
 // Icons
@@ -15,6 +15,7 @@ import CommentItem from "../../components/Card/Comment";
 
 // API
 import apiV1 from "../../api/apiInstance";
+import Loading from "../../components/Loading/Loading";
 
 
 const Detail = () => {
@@ -76,10 +77,10 @@ const Detail = () => {
 
   return (
     <Flex minH='100vh' direction="column" gap="6">
-      {
+    {
         loading
-          ? <Text>Loading Brow</Text> 
-          : (<>
+          ? <Loading />
+          : <>
             <Flex gap="2">
               <IconButton
                 aria-label="back to index"
@@ -163,7 +164,7 @@ const Detail = () => {
                 ))
               }
             </Flex>
-          </>)
+          </>
       }
     </Flex>
   )
