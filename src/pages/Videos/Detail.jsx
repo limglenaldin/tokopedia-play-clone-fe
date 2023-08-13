@@ -70,7 +70,7 @@ const Detail = () => {
 
     updateVideoView()
     getVideoDetails()
-  }, [])
+  }, [id, username])
 
   const handleClickBack = () => {
     history.push(`/`)
@@ -118,7 +118,7 @@ const Detail = () => {
               <Flex w={3/12} bgColor="gray.600" p="2" direction="column" borderRadius="xl" justify="space-between">
                 <Flex direction="column" gap="1" overflowY="auto" maxH="md">
                   {
-                    video?.length > 1
+                    video?.comments?.length > 1
                       ? video?.comments?.map((comment) => (
                           <CommentItem
                             key={comment.id}
