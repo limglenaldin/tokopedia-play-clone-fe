@@ -32,7 +32,8 @@ const Detail = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting }
+    reset,
+    formState: { errors, isSubmitting, isSubmitSuccessful }
   } = useForm({
     defaultValues: {
       username: username !== 'guest' ? username : '',
@@ -70,7 +71,7 @@ const Detail = () => {
 
     updateVideoView()
     getVideoDetails()
-  }, [id, username])
+  }, [id, isSubmitSuccessful])
 
   const handleClickBack = () => {
     history.push(`/`)
@@ -80,6 +81,10 @@ const Detail = () => {
     try {
       const response = await apiV1.post(`/videos/${id}/comments`, data)
       if (response.status === 201) {
+        reset({
+          username: username !== 'guest' ? username : '',
+          comment: ''
+        })
         setUsername(data.username)
       }
     } catch (error) {
