@@ -7,9 +7,6 @@ import {
   Route
 } from "react-router-dom";
 
-// Component
-import Header from './components/Header';
-
 // Pages
 import Index from './pages/Index';
 import Detail from './pages/Videos/Detail';
@@ -20,8 +17,7 @@ function App() {
     <ChakraProvider>
       <Router>
         <Box minW="full" bg="gray.800" color="white">
-          <Header />
-          <Box px="4" pb="4">
+          <Box px="4">
             <Switch>
               <Route path="/search" component={Search} />
               <Route path="/:id" component={Detail} />

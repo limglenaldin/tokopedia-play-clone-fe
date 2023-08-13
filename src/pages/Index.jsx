@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Flex, Grid } from "@chakra-ui/react";
 
 // Components
+import Header from "../components/Header";
 import VideoItem from "../components/Card/Video";
 import VideoSkeleton from "../components/Loading/Skeleton/VideoSkeleton";
 
@@ -41,7 +42,8 @@ const Index = () => {
   }, [])
 
   return (
-    <Flex minH='100vh' direction="column">
+    <Flex minH='100vh' direction="column" pb="4">
+      <Header />
       <Grid templateColumns={gridColResponsive} gap={4}>
         {
           loading

@@ -17,24 +17,34 @@ import CommentItem from "../../components/Card/Comment";
 import apiV1 from "../../api/apiInstance";
 import Loading from "../../components/Loading/Loading";
 
+// Hooks
+import useUsername from "../../hooks/useUsername";
+import Header from "../../components/Header";
 
 const Detail = () => {
   const { id } = useParams();
   let history = useHistory();
+  const { username, setUsername } = useUsername()
 
   const [video, setVideo] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting }
-  } = useForm()
+  } = useForm({
+    defaultValues: {
+      username: username !== 'guest' ? username : '',
+      comment: ''
+    }
+  })
 
   useEffect(() => {
     const updateVideoView = async () => {
       try {
+        // eslint-disable-next-line no-unused-vars
         const response = await apiV1.patch(`/videos/${id}`)
-        console.log(response.data)
       } catch (error) {
         console.log(error)
       }
@@ -69,18 +79,23 @@ const Detail = () => {
   const onSubmitComment = async (data) => {
     try {
       const response = await apiV1.post(`/videos/${id}/comments`, data)
-      console.log(response)
+      if (response.status === 201) {
+        setUsername(data.username)
+      }
     } catch (error) {
       console.log(error)
     }
   }
 
   return (
-    <Flex minH='100vh' direction="column" gap="6">
+    <Box minH='100vh' pb={4}>
+      <Header
+        username={username}
+      />
     {
         loading
           ? <Loading />
-          : <>
+          : <Flex direction="column" gap="6">
             <Flex gap="2">
               <IconButton
                 aria-label="back to index"
@@ -101,11 +116,11 @@ const Detail = () => {
                 </AspectRatio>
               </Box>
               <Flex w={3/12} bgColor="gray.600" p="2" direction="column" borderRadius="xl" justify="space-between">
-                <Flex direction="column" gap="1" overflowY="auto" maxH="sm">
+                <Flex direction="column" gap="1" overflowY="auto" maxH="md">
                   {
-                    video?.comments?.map((comment, i) => (
+                    video?.comments?.map((comment) => (
                       <CommentItem
-                        key={i}
+                        key={comment.id}
                         data={comment}
                       />
                     ))
@@ -121,7 +136,7 @@ const Detail = () => {
                           placeholder="Comment"
                           _placeholder={{color: 'white' }}
                           {...register('comment', { required: 'This field is required' })}
-                          disabled={isSubmitting}
+                          _disabled={isSubmitting}
                         />
                         <FormErrorMessage>
                           {errors.comment && errors.comment.message}
@@ -133,10 +148,11 @@ const Detail = () => {
                               type="text"
                               name="username"
                               id="username"
-                              placeholder="Username"
+                              placeholder="Name"
                               _placeholder={{color: 'white' }}
                               {...register('username', { required: 'This field is required' })}
-                              disabled={isSubmitting}
+                              readOnly={username !== 'guest' ? true : false}
+                              _disabled={isSubmitting}
                             />
                             <FormErrorMessage>
                               {errors.username && errors.username.message}
@@ -154,7 +170,7 @@ const Detail = () => {
                 </Box>
               </Flex>
             </Flex>
-            <Flex overflowX="auto" gap={2} pb="4">
+            <Flex overflowX="auto" gap="2" pb="4">
               {
                 video?.products?.map((product) => (
                   <ProductItem
@@ -164,9 +180,9 @@ const Detail = () => {
                 ))
               }
             </Flex>
-          </>
+          </Flex>
       }
-    </Flex>
+    </Box>
   )
 }
 
