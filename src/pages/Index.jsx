@@ -6,7 +6,7 @@ import { Flex, Grid } from "@chakra-ui/react";
 
 // Components
 import VideoItem from "../components/Card/Video";
-import VideoSkeleton from "../components/Skeleton/VideoSkeleton";
+import VideoSkeleton from "../components/Loading/Skeleton/VideoSkeleton";
 
 // API
 import apiV1 from "../api/apiInstance";
