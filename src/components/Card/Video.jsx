@@ -33,7 +33,7 @@ const VideoItem = ({data}) => {
             <Text fontSize="sm">{data.totalView}</Text>
           </Flex>
           <Spacer />
-          <Box>
+          <Box color="gray.100">
             <Text fontSize="md" as="b">{data.title}</Text>
             <Text fontSize="sm">{data.store}</Text>
           </Box>
