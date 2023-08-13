@@ -2,10 +2,11 @@
 import { Avatar, Flex, Icon, Spacer, Text, Link as ChakraLink } from "@chakra-ui/react"
 import { Link as ReactRouterLink } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
+import PropTypes from 'prop-types';
 
-const Header = () => {
+const Header = ({username = 'Guest'}) => {
   return (
-    <Flex px="4" py="5" mb="6" align="center">
+    <Flex py="5" mb="6" align="center">
       <Text fontSize="lg" as="b">
         <ReactRouterLink to="/">
           TokoPlay
@@ -18,11 +19,15 @@ const Header = () => {
         </ChakraLink>
         <Flex align="center" gap="2">
           <Avatar bg="red.500" size="sm" />
-          <Text>Halo, Guest!</Text>
+          <Text>Halo, {username}</Text>
         </Flex>
       </Flex>
     </Flex>
   )
+}
+
+Header.propTypes = {
+  username: <PropTypes className="string"></PropTypes>,
 }
 
 export default Header
