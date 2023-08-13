@@ -38,7 +38,7 @@ const Index = () => {
     }
 
     getVideos()
-  })
+  }, [])
 
   return (
     <Flex minH='100vh' direction="column">
