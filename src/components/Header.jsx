@@ -1,8 +1,10 @@
 // Third-party Libraries
 import { Avatar, Flex, Icon, Spacer, Text, Link as ChakraLink } from "@chakra-ui/react"
 import { Link as ReactRouterLink } from "react-router-dom";
-import { FiSearch } from "react-icons/fi";
 import PropTypes from 'prop-types';
+
+// Icons
+import { FiSearch } from "react-icons/fi";
 
 const Header = ({username = 'Guest'}) => {
   return (
