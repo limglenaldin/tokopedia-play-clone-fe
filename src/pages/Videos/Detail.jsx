@@ -22,6 +22,27 @@ import Loading from "../../components/Loading/Loading";
 import useUsername from "../../hooks/useUsername";
 import useSocket from "../../hooks/useSocket";
 
+// Chakra Responsive
+const flexContainerResponsive = {
+  base: "column",
+  xl: "row",
+}
+
+const videoContainerWidth = {
+  base: "full",
+  xl: 9 / 12
+}
+
+const commentContainerWidth = {
+  base: "full",
+  xl: 3 / 12
+}
+
+const titleFontSize = {
+  base: "md",
+  lg: "lg"
+}
+
 const Detail = () => {
   const { id } = useParams();
   let history = useHistory();
@@ -75,6 +96,7 @@ const Detail = () => {
 
     updateVideoView()
     getVideoDetails()
+    socket.connect()
   }, [])
 
   useEffect(() => {
@@ -89,7 +111,6 @@ const Detail = () => {
     }
 
     socket.on('newComment', () => {
-      console.log('hello')
       getVideoComments()
     })
   }, [id, socket])
@@ -122,17 +143,17 @@ const Detail = () => {
         loading
           ? <Loading />
           : <Flex direction="column" gap="6">
-            <Flex gap="2">
+            <Flex gap="2" align="center">
               <IconButton
                 aria-label="back to index"
                 icon={<Icon as={FiArrowLeft} />}
                 variant="unstyled"
                 onClick={handleClickBack}
               />
-              <Heading as="h3" size="lg">{video?.title}</Heading>
+              <Heading as="h3" size={titleFontSize}>{video?.title}</Heading>
             </Flex>
-            <Flex direction="row" gap="4">
-              <Box w={9/12}>
+            <Flex direction={flexContainerResponsive} gap="4" height="min-content">
+              <Box w={videoContainerWidth}>
                 <AspectRatio ratio={16/9}>
                   <iframe
                     title={video?.title}
@@ -141,7 +162,7 @@ const Detail = () => {
                   />
                 </AspectRatio>
               </Box>
-              <Flex w={3/12} bgColor="gray.600" p="2" direction="column" borderRadius="xl" justify="space-between">
+              <Flex w={commentContainerWidth} bgColor="gray.600" p="2" direction="column" borderRadius="xl" justify="space-between" minH="sm">
                 <Flex direction="column" gap="1" overflowY="auto" maxH="md">
                   {
                     comments?.map((comment) => (
