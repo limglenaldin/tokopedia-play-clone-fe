@@ -29,7 +29,7 @@ const Header = ({username = 'Guest'}) => {
 }
 
 Header.propTypes = {
-  username: <PropTypes className="string"></PropTypes>,
+  username: PropTypes.string,
 }
 
 export default Header
