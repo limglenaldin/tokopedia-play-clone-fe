@@ -8,8 +8,6 @@ const useSocket = () => {
     autoConnect: false
   })
 
-  socket.connect()
-
   return { socket }
 }
 
