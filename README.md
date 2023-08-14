@@ -1,6 +1,6 @@
 # TokoPlay
 
-TokoPlay is a frontend of Tokopedia Play clone built by ReactJS (Vite) and Chakra UI. For the backend service can be check on [this repo](https://github.com/limglenaldin/tokopedia-play-clone)
+TokoPlay is a frontend of Tokopedia Play clone built in ReactJS (Vite) and Chakra UI. For the backend service can be check on [this repo](https://github.com/limglenaldin/tokopedia-play-clone)
 
 ## Features
 - List of Videos
@@ -70,13 +70,13 @@ TokoPlay is a frontend of Tokopedia Play clone built by ReactJS (Vite) and Chakr
    npm install
    npm run dev
    ```
-6. Finally, It can be access on `http://localhost:3000`
+6. Finally, it can be access on `http://localhost:3000`
 
 ### Running via Docker Compose
 
 #### Prerequsited
 - Have installed docker on the machine
-- Have installed `make` on terminal
+- Have installed `make` on terminal (optional)
 
 #### Step to Run
 1. Clone the repo to your local machine
@@ -96,3 +96,19 @@ TokoPlay is a frontend of Tokopedia Play clone built by ReactJS (Vite) and Chakr
    make compose-up
    ```
 4. Finally, it can be access on `http://localhost:3000`
+
+### Running via Pull Docker Image
+
+#### Prerequsite
+- Have installed docker on the machine
+
+#### Step to Run
+1. Pull docker image to your local machine
+   ```
+   docker pull limglenaldin/tokoplay
+   ```
+2. Create container
+   ```
+   docker run -d -p 3000:3000 --name tokoplay limglenaldin/tokoplay
+   ```
+3. Finally, it can be access on `http://localhost:3000`
