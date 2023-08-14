@@ -1,6 +1,6 @@
 # TokoPlay
 
-TokoPlay is a frontend of Tokopedia Play clone built in ReactJS (Vite) and Chakra UI. For the backend service can be check on [this repo](https://github.com/limglenaldin/tokopedia-play-clone)
+TokoPlay is a frontend of Tokopedia Play clone built in ReactJS (Vite) and Chakra UI. For the backend service can be checked on [this repo](https://github.com/limglenaldin/tokopedia-play-clone)
 
 ## Features
 - List of Videos
@@ -51,9 +51,9 @@ TokoPlay is a frontend of Tokopedia Play clone built in ReactJS (Vite) and Chakr
 
 ### Running directly via terminal (npm)
 
-#### Prerequsited
+#### Prerequisites
 - Have installed NodeJS v18 on the machine
-- Have running backend service on local machine
+- Have running backend service on a local machine
 
 #### Step to Run
 1. Clone the repo to your local machine
@@ -64,19 +64,19 @@ TokoPlay is a frontend of Tokopedia Play clone built in ReactJS (Vite) and Chakr
    ```
    cd tokopedia-play-clone-fe
    ```
-4. Create `.env` file by running `cp .env.example .env`
+4. Create a `.env` file by running `cp .env.example .env`
 5. Install dependencies and start the development server
    ```
    npm install
    npm run dev
    ```
-6. Finally, it can be access on `http://localhost:3000`
+6. Finally, it can be accessed on `http://localhost:3000`
 
 ### Running via Docker Compose
 
-#### Prerequsited
+#### Prerequisites
 - Have installed docker on the machine
-- Have installed `make` on terminal (optional)
+- Have installed `make` on a terminal (optional)
 
 #### Step to Run
 1. Clone the repo to your local machine
@@ -91,24 +91,24 @@ TokoPlay is a frontend of Tokopedia Play clone built in ReactJS (Vite) and Chakr
    ```
    docker-compose -f docker-compose.yml up --build -d
    ```
-   or if has installed `make`
+   or if it has installed `make`
    ```
    make compose-up
    ```
-4. Finally, it can be access on `http://localhost:3000`
+4. Finally, it can be accessed on `http://localhost:3000`
 
 ### Running via Pull Docker Image
 
-#### Prerequsite
+#### Prerequisite
 - Have installed docker on the machine
 
 #### Step to Run
-1. Pull docker image to your local machine
+1. Pull the docker image to your local machine
    ```
    docker pull limglenaldin/tokoplay
    ```
-2. Create container
+2. Create a container
    ```
    docker run -d -p 3000:3000 --name tokoplay limglenaldin/tokoplay
    ```
-3. Finally, it can be access on `http://localhost:3000`
+3. Finally, it can be accessed on `http://localhost:3000`
