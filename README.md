@@ -9,6 +9,8 @@ TokoPlay is a frontend of Tokopedia Play clone built in ReactJS (Vite) and Chakr
 - Search video
 - Dynamic Username
 
+![TokoPlay Demo](https://raw.githubusercontent.com/limglenaldin/limglenaldin/master/TokoPlay_Demo.gif)
+
 ## Database Schema
 
 ```mermaid
