@@ -5,6 +5,14 @@ import PropTypes from 'prop-types';
 // Hooks
 import { useRupiahCurrency } from "../../hooks/useCurrency";
 
+// Chakra Responsive
+const cardFlexBasis = {
+  base: "40%",
+  sm: "30%",
+  md: "24%",
+  lg: "16%",
+}
+
 const ProductItem = ({ data }) => {
   const currency = useRupiahCurrency(data?.price)
 
@@ -13,7 +21,7 @@ const ProductItem = ({ data }) => {
   }
 
   return (
-    <Card flexBasis="16%" flexShrink="0" maxW="sm" _hover={{cursor: "pointer"}} onClick={handleClickProduct}>
+    <Card flexBasis={cardFlexBasis} flexShrink="0" maxW="sm" _hover={{cursor: "pointer"}} onClick={handleClickProduct}>
       <CardBody p="2">
         <Image
           src={data?.imageUrl}
