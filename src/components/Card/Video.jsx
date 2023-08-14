@@ -16,7 +16,7 @@ const VideoItem = ({data}) => {
   let history = useHistory();
 
   const handleClickCard = () => {
-    history.push(`/${data._id}`)
+    history.push(`/videos/${data._id}`)
   }
 
   return (

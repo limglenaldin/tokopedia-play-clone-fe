@@ -11,6 +11,7 @@ import {
 import Index from './pages/Index';
 import Detail from './pages/Videos/Detail';
 import Search from './pages/Search';
+import NotFoundPage from './pages/Error/404';
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
           <Box px="4">
             <Switch>
               <Route path="/search" component={Search} />
-              <Route path="/:id" component={Detail} />
-              <Route path="/" component={Index} />
+              <Route path="/videos/:id" component={Detail} />
+              <Route exact path="/" component={Index} />
+              <Route component={NotFoundPage} />
             </Switch>
           </Box>
         </Box>
