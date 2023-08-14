@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  tokoplay:
+    container_name: "tokoplay"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: on-failure
+    ports:
+      - "3000:3000"
+    depends_on:
+      - tokoplay-svc
+  tokoplay-svc:
+    container_name: "tokoplay-svc"
+    image: limglenaldin/tokoplay-service:latest
+    restart: on-failure
+    ports:
+      - "5000:5000"
