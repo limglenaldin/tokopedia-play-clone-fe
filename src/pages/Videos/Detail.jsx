@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 // Third-party Libraries
 import { useParams, useHistory } from "react-router-dom";
-import { AspectRatio, Box, Center, Flex, FormControl, FormErrorMessage, Heading, Icon, IconButton, Input, Textarea } from "@chakra-ui/react";
+import { AspectRatio, Box, Flex, FormControl, FormErrorMessage, Heading, Icon, IconButton, Input, Textarea } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form'
 
 // Icons
@@ -12,6 +12,7 @@ import { FiArrowLeft, FiSend } from "react-icons/fi";
 // Components
 import ProductItem from "../../components/Card/Product";
 import CommentItem from "../../components/Card/Comment";
+import Header from "../../components/Header";
 
 // API
 import apiV1 from "../../api/apiInstance";
@@ -19,21 +20,24 @@ import Loading from "../../components/Loading/Loading";
 
 // Hooks
 import useUsername from "../../hooks/useUsername";
-import Header from "../../components/Header";
+import useSocket from "../../hooks/useSocket";
 
 const Detail = () => {
   const { id } = useParams();
   let history = useHistory();
+
   const { username, setUsername } = useUsername()
+  const { socket } = useSocket()
 
   const [video, setVideo] = useState([]);
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const {
     handleSubmit,
     register,
     reset,
-    formState: { errors, isSubmitting, isSubmitSuccessful }
+    formState: { errors, isSubmitting }
   } = useForm({
     defaultValues: {
       username: username !== 'guest' ? username : '',
@@ -50,18 +54,18 @@ const Detail = () => {
         console.log(error)
       }
     }
-
+  
     const getVideoDetails = async () => {
       try {
         const resVideoDetail = await apiV1.get(`/videos/${id}`)
         const resProducts = await apiV1.get(`/videos/${id}/products`)
         const resComments = await apiV1.get(`/videos/${id}/comments`)
-
+  
         setVideo({
           ...resVideoDetail.data?.data,
           products: resProducts.data?.data,
-          comments: resComments.data?.data
         })
+        setComments(resComments.data?.data)
         setLoading(false)
       } catch (error) {
         console.log(error)
@@ -71,7 +75,24 @@ const Detail = () => {
 
     updateVideoView()
     getVideoDetails()
-  }, [id, isSubmitSuccessful])
+  }, [])
+
+  useEffect(() => {
+    const getVideoComments = async () => {
+      try {
+        const resComments = await apiV1.get(`/videos/${id}/comments`)
+  
+        setComments(resComments.data?.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    socket.on('newComment', () => {
+      console.log('hello')
+      getVideoComments()
+    })
+  }, [id, socket])
 
   const handleClickBack = () => {
     history.push(`/`)
@@ -82,7 +103,7 @@ const Detail = () => {
       const response = await apiV1.post(`/videos/${id}/comments`, data)
       if (response.status === 201) {
         reset({
-          username: username !== 'guest' ? username : '',
+          username: data.username,
           comment: ''
         })
         setUsername(data.username)
@@ -123,14 +144,12 @@ const Detail = () => {
               <Flex w={3/12} bgColor="gray.600" p="2" direction="column" borderRadius="xl" justify="space-between">
                 <Flex direction="column" gap="1" overflowY="auto" maxH="md">
                   {
-                    video?.comments?.length > 1
-                      ? video?.comments?.map((comment) => (
-                          <CommentItem
-                            key={comment.id}
-                            data={comment}
-                          />
-                        ))
-                      : <Center minH="md">Be the first one to comment</Center>
+                    comments?.map((comment) => (
+                      <CommentItem
+                        key={comment.id}
+                        data={comment}
+                      />
+                    ))
                   }
                 </Flex>
                 <Box borderTop="1px" pt="4">
